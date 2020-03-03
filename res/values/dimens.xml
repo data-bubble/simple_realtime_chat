@@ -2,4 +2,5 @@
 <resources>
 
     <dimen name="margin_all_element">2dp</dimen>
+    <dimen name="corner_rad">5dp</dimen>
 </resources>

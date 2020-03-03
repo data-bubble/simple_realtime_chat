@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fire.chaty.R;
-import com.fire.chaty.activityes.MainActivity;
+import com.fire.chaty.activitys.MainActivity;
 import com.fire.chaty.model.MessageItem;
 
 import java.util.List;
@@ -26,13 +26,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder{
             private TextView name;
            private ImageView imageView;
-           private TextView text;
+           private TextView textView;
+
 
             public MyViewHolder(View view){
                 super(view);
                 this.name=view.findViewById(R.id.text_name);
                 this.imageView=view.findViewById(R.id.image);
-                this.text=view.findViewById(R.id.text);
+                this.textView=view.findViewById(R.id.text);
             }
 
     }
@@ -58,20 +59,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             String text=messageItem.getText();
             String imageUrl=messageItem.getImageUrl();
             ImageView photoImageView=holder.imageView;
+            TextView textView=holder.textView;
             if(name!=null)
                  holder.name.setText(messageItem.getName());
-        if(imageUrl==null)
-            photoImageView.setVisibility(View.GONE);
+        if(imageUrl==null){
+            textView.setVisibility(View.VISIBLE);
+            photoImageView.setVisibility(View.GONE);}
         else {
+            textView.setVisibility(View.GONE);
             photoImageView.setVisibility(View.VISIBLE);
             Glide.with(photoImageView.getContext()).load(imageUrl).into(photoImageView);
+            photoImageView.setAdjustViewBounds(true);                           //imageview по размеру изображения
         }
 
         if(text==null)
-            holder.text.setVisibility(View.GONE);
+            holder.textView.setVisibility(View.GONE);
         else {
-            holder.text.setVisibility(View.VISIBLE);
-            holder.text.setText(text);
+            holder.textView.setVisibility(View.VISIBLE);
+            holder.textView.setText(text);
         }
 
 
